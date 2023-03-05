@@ -1,16 +1,8 @@
-const expect = require("chai").expect;
+const request = require("supertest");
 const app = require("../../src/server");
 
-describe("/GET something", () => {
-  it.only("it should GET", () => {
-    //   chai
-    //     .request(server)
-    //     .get("/book")
-    //     .end((err, res) => {
-    //       res.should.have.status(200);
-    //       res.body.should.be.a("array");
-    //       res.body.length.should.be.eql(0);
-    //       done();
-    //     });
+describe("/POST", () => {
+  it("should succeed for the post method", async () => {
+    await request(app).post("/convert-number").send({ number: 10 }).expect(200);
   });
 });
