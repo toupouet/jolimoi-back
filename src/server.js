@@ -8,8 +8,10 @@ app.use(cors());
 app.use(express.json());
 app.use(router);
 
-app.listen(port, function () {
-  console.log(`Application listening on port : ${port}`);
-});
+if (!module.parent) {
+  app.listen(port, function () {
+    console.log(`Application listening on port : ${port}`);
+  });
+}
 
 module.exports = app;

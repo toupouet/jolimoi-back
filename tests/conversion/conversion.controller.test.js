@@ -1,7 +1,8 @@
 const expect = require("chai").expect;
+const app = require("../../src/server");
 
 describe("/GET something", () => {
-  it("it should GET", () => {
+  it.only("it should GET", () => {
     //   chai
     //     .request(server)
     //     .get("/book")
