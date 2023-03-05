@@ -12,7 +12,7 @@ const {
 } = require("../../src/helpers/messages/common-error.message");
 const conversionService = require("../../src/conversion/conversion.service");
 
-describe.only("convert to number", () => {
+describe("convert to number", () => {
   it("should fail if the property <number> is missing", async () => {
     await expect(conversionService.convertNumber({})).to.be.rejectedWith(
       `${MISSING_PROPERTY} number`
