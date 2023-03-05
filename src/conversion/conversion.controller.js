@@ -10,6 +10,11 @@ const convertNumber = (req, res, next) => {
     .catch((err) => next(err));
 };
 
+const serverSentEvents = (req, res, next) => {
+  conversionService.serverSentEvents(res).catch((err) => next(err));
+};
+
 router.post("/convert-number", convertNumber);
+router.get("/live-event", serverSentEvents);
 
 module.exports = router;

@@ -4,6 +4,8 @@ const {
 } = require("./conversion.helper");
 const { ABOUT_ZERO } = require("./conversion.message");
 
+let convertedNumber;
+
 async function convertNumber(data = {}) {
   const { number } = data;
 
@@ -13,7 +15,9 @@ async function convertNumber(data = {}) {
     return ABOUT_ZERO;
   }
 
-  return convertToRoman(number);
+  convertedNumber = convertToRoman(number);
+
+  return convertedNumber;
 }
 
 function convertToRoman(number) {
@@ -40,4 +44,18 @@ function convertToRoman(number) {
   }
 }
 
-module.exports = { convertNumber };
+async function serverSentEvents(res) {
+  const headers = {
+    "Content-Type": "text/event-stream",
+    Connection: "keep-alive",
+    "Cache-Control": "no-cache",
+  };
+
+  res.writeHead(200, headers);
+  setInterval(async () => {
+    res.write(`data: ${JSON.stringify({ convertedNumber })}`);
+    res.write("\n\n");
+  }, 5000);
+}
+
+module.exports = { convertNumber, serverSentEvents };
